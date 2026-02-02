@@ -30,4 +30,5 @@ client.once("ready", () => {
   console.log("Bot joined voice channel");
 });
 
-client.login("MTM2MDI2MDU5Nzg0NDgwMzgyNg.G-_RW4.3lQ711IQ_y-fNizxrbiTaxCirhHp6Nb0witZYA");
+client.login(process.env.TOKEN);
+
