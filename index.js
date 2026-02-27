@@ -50,13 +50,14 @@ https://discord.com/channels/1311865049111072889/1476303082475225199
 
   );
 
-  channel.send({
-    content: `Heelo! ${member}`,
-    embeds: [embed],
-  });
+channel.send({
+  content: `Heelo! ${member}`,
+  embeds: [embed]
+});
 });
 
 client.login(TOKEN);
+
 
 
 
