@@ -47,16 +47,7 @@ https://discord.com/channels/1311865049111072889/1476303082475225199
     })
     .setTimestamp();
 
-  const row = new ActionRowBuilder().addComponents(
-    new ButtonBuilder()
-      .setLabel("Rules")
-      .setStyle(ButtonStyle.Link)
-      .setURL("https://discord.com/channels/YOUR_SERVER_ID/RULES_CHANNEL_ID"),
 
-    new ButtonBuilder()
-      .setLabel("Community")
-      .setStyle(ButtonStyle.Link)
-      .setURL("https://discord.gg/YOUR_INVITE")
   );
 
   channel.send({
@@ -67,5 +58,6 @@ https://discord.com/channels/1311865049111072889/1476303082475225199
 });
 
 client.login(TOKEN);
+
 
 
