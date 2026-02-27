@@ -1,10 +1,7 @@
 const {
   Client,
   GatewayIntentBits,
-  EmbedBuilder,
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle
+  EmbedBuilder
 } = require("discord.js");
 
 const client = new Client({
@@ -14,7 +11,7 @@ const client = new Client({
   ]
 });
 
-const TOKEN = process.env.TOKEN; // مهم لRailway
+const TOKEN = process.env.TOKEN;
 const WELCOME_CHANNEL_ID = process.env.CHANNEL_ID;
 
 client.once("ready", () => {
@@ -36,28 +33,20 @@ client.on("guildMemberAdd", async (member) => {
 
 ### 𝓦𝓮𝓵𝓬𝓸𝓶𝓮
 
-https://discord.com/channels/1311865049111072889/1476309801960210442
+<#1476309801960210442>
 
-https://discord.com/channels/1311865049111072889/1476303082475225199
-
+<#1476303082475225199>
 `)
-    .setImage("https://i.postimg.cc/PJfLnZtZ/2F083659-4BAD-48DB-AE82-75218D593BB2.jpg") // حط رابط البانر حقك
+    .setImage("https://i.postimg.cc/PJfLnZtZ/2F083659-4BAD-48DB-AE82-75218D593BB2.jpg")
     .setFooter({
       text: "VantaCrew • Join • Play • Rule"
     })
     .setTimestamp();
 
-
-  );
-
-channel.send({
-  content: `Heelo! ${member}`,
-  embeds: [embed]
-});
+  channel.send({
+    content: `Heelo! ${member}`,
+    embeds: [embed]
+  });
 });
 
 client.login(TOKEN);
-
-
-
-
