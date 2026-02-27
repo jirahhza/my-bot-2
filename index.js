@@ -38,8 +38,7 @@ client.on("guildMemberAdd", async (member) => {
 <#1476303082475225199>
 `)
     .setImage("https://i.postimg.cc/PJfLnZtZ/2F083659-4BAD-48DB-AE82-75218D593BB2.jpg")
-    .setFooter({
-      text: "VantaCrew • Join • Play • Rule"
+    .setFooter({ 
     })
     .setTimestamp();
 
@@ -50,3 +49,4 @@ client.on("guildMemberAdd", async (member) => {
 });
 
 client.login(TOKEN);
+
