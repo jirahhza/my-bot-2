@@ -1,93 +1,66 @@
-require("dotenv").config();
 const {
   Client,
   GatewayIntentBits,
-  Partials,
+  EmbedBuilder,
   ActionRowBuilder,
   ButtonBuilder,
-  ButtonStyle,
-  StringSelectMenuBuilder,
-  Events
+  ButtonStyle
 } = require("discord.js");
 
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers
-  ],
-  partials: [Partials.Channel]
+  ]
 });
+
+const TOKEN = process.env.TOKEN; // مهم لRailway
+const WELCOME_CHANNEL_ID = process.env.CHANNEL_ID;
 
 client.once("ready", () => {
   console.log(`✅ Logged in as ${client.user.tag}`);
 });
 
-// أمر إرسال لوحة الرتب
-client.on("interactionCreate", async interaction => {
+client.on("guildMemberAdd", async (member) => {
+  const channel = member.guild.channels.cache.get(WELCOME_CHANNEL_ID);
+  if (!channel) return;
 
-  // زر الرتب
-  if (interaction.isButton()) {
-    const role = interaction.guild.roles.cache.find(r => r.name === interaction.customId);
+  const embed = new EmbedBuilder()
+    .setColor("#8A2BE2")
+    .setAuthor({
+      name: `${member.user.username}`,
+      iconURL: member.user.displayAvatarURL({ dynamic: true })
+    })
+    .setDescription(`
+<@${member.id}>
 
-    if (!role) return interaction.reply({ content: "❌ الرتبة غير موجودة", ephemeral: true });
+### Welcome
 
-    await interaction.member.roles.add(role);
-    await interaction.reply({ content: `✅ تم إعطائك رتبة ${role.name}`, ephemeral: true });
-  }
+Please read the rules and check the links below.
+`)
+    .setImage("https://i.imgur.com/yourbanner.png") // حط رابط البانر حقك
+    .setFooter({
+      text: "VantaCrew • Join • Play • Rule"
+    })
+    .setTimestamp();
 
-  // قائمة الألوان
-  if (interaction.isStringSelectMenu()) {
-    const role = interaction.guild.roles.cache.find(r => r.name === interaction.values[0]);
+  const row = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setLabel("Rules")
+      .setStyle(ButtonStyle.Link)
+      .setURL("https://discord.com/channels/YOUR_SERVER_ID/RULES_CHANNEL_ID"),
 
-    if (!role) return interaction.reply({ content: "❌ اللون غير موجود", ephemeral: true });
+    new ButtonBuilder()
+      .setLabel("Community")
+      .setStyle(ButtonStyle.Link)
+      .setURL("https://discord.gg/YOUR_INVITE")
+  );
 
-    await interaction.member.roles.add(role);
-    await interaction.reply({ content: `🎨 تم اختيار لون ${role.name}`, ephemeral: true });
-  }
+  channel.send({
+    content: `Heelo! ${member}`,
+    embeds: [embed],
+    components: [row]
+  });
 });
 
-// أمر سلاش لإنشاء اللوحة
-client.on("ready", async () => {
-  const data = [{
-    name: "panel",
-    description: "إرسال لوحة الرتب"
-  }];
-
-  await client.application.commands.set(data);
-});
-
-client.on("interactionCreate", async interaction => {
-  if (!interaction.isChatInputCommand()) return;
-
-  if (interaction.commandName === "panel") {
-
-    const buttons = new ActionRowBuilder();
-
-    for (let i = 1; i <= 10; i++) {
-      buttons.addComponents(
-        new ButtonBuilder()
-          .setCustomId(`${i}`)
-          .setLabel(`${i}`)
-          .setStyle(ButtonStyle.Primary)
-      );
-    }
-
-    const colors = new ActionRowBuilder().addComponents(
-      new StringSelectMenuBuilder()
-        .setCustomId("colors")
-        .setPlaceholder("اختر لونك")
-        .addOptions([
-          { label: "Red", value: "Red" },
-          { label: "Blue", value: "Blue" },
-          { label: "Green", value: "Green" }
-        ])
-    );
-
-    await interaction.reply({
-      content: "🎭 اختر مستواك أو لونك:",
-      components: [buttons, colors]
-    });
-  }
-});
-
-client.login(process.env.TOKEN);
+client.login(TOKEN);
