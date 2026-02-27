@@ -38,7 +38,7 @@ client.on("guildMemberAdd", async (member) => {
 
 Please read the rules and check the links below.
 `)
-    .setImage("https://i.imgur.com/yourbanner.png") // حط رابط البانر حقك
+    .setImage("https://i.postimg.cc/PJfLnZtZ/2F083659-4BAD-48DB-AE82-75218D593BB2.jpg") // حط رابط البانر حقك
     .setFooter({
       text: "VantaCrew • Join • Play • Rule"
     })
@@ -64,3 +64,4 @@ Please read the rules and check the links below.
 });
 
 client.login(TOKEN);
+
