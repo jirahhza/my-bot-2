@@ -34,9 +34,12 @@ client.on("guildMemberAdd", async (member) => {
     .setDescription(`
 <@${member.id}>
 
-### Welcome
+### 𝓦𝓮𝓵𝓬𝓸𝓶𝓮
 
-Please read the rules and check the links below.
+https://discord.com/channels/1311865049111072889/1476309801960210442
+
+https://discord.com/channels/1311865049111072889/1476303082475225199
+
 `)
     .setImage("https://i.postimg.cc/PJfLnZtZ/2F083659-4BAD-48DB-AE82-75218D593BB2.jpg") // حط رابط البانر حقك
     .setFooter({
@@ -64,4 +67,5 @@ Please read the rules and check the links below.
 });
 
 client.login(TOKEN);
+
 
